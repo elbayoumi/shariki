@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('f00_answers', function (Blueprint $table) {
             $table->id();
+            
             $table->foreignIdFor(F00Request::class)->constrained()->cascadeOnDelete();
 
             $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();

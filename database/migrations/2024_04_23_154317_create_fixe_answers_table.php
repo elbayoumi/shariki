@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\FixedQuestions;
 use App\Models\Questions;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('fixe_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Questions::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(FixedQuestions::class)->constrained()->cascadeOnDelete();
 
             $table->string('m00_formula');
             $table->string('f00_formula');
-            
+
             $table->timestamps();
         });
     }
