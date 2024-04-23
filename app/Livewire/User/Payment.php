@@ -4,105 +4,102 @@ namespace App\Livewire\User;
 
 use App\Models\CouponCode;
 use App\Models\Payment as PaymentModel;
-use Laravel\Cashier\Coupon;
+use Illuminate\Support\Facades\Session;
 use Stripe\PaymentMethod;
 use Livewire\Component;
+use Stripe\Exception\CardException;
 use Stripe\Stripe;
-
 class Payment extends Component
 {
     public $coupon_code;
     public $amount = 2000;
     public $cardNumber;
-    public $cardExpiryMonth;
-    public $cardExpiryYear;
+    public $expiryDate;
     public $cardCVC;
-
 
     protected $rules = [
         'cardNumber' => 'required|regex:/^[45]\d{15}$/',
-        'cardExpiryMonth' => 'required|numeric|between:1,12',
-        'cardExpiryYear' => 'required|numeric|digits:4',
+        'expiryDate' => 'required|date_format:m/y',
         'cardCVC' => 'required|numeric|digits:3',
     ];
 
     protected $messages = [
         'cardNumber.required' => 'رقم البطاقة مطلوب.',
         'cardNumber.regex' => 'رقم البطاقة يجب أن يكون صالحاً ومكون من 16 رقماً.',
-        'cardExpiryMonth.required' => 'حقل شهر الانتهاء مطلوب.',
-        'cardExpiryMonth.numeric' => 'يجب أن يكون شهر الانتهاء رقماً.',
-        'cardExpiryMonth.between' => 'شهر الانتهاء يجب أن يكون بين :min و :max.',
-        'cardExpiryYear.required' => 'حقل سنة الانتهاء مطلوب.',
-        'cardExpiryYear.numeric' => 'يجب أن تكون سنة الانتهاء رقماً.',
+        'expiryDate.required' => 'حقل تاريخ الانتهاء مطلوب.',
+        'expiryDate.date_format' => 'يجب أن يكون تاريخ الانتهاء بشكل صحيح.',
         'cardExpiryYear.digits' => 'سنة الانتهاء يجب أن تتكون من :digits أرقام.',
         'cardCVC.required' => 'حقل رمز الحماية مطلوب.',
         'cardCVC.numeric' => 'يجب أن يكون رمز الحماية رقماً.',
         'cardCVC.digits' => 'رمز الحماية يجب أن يتكون من :digits أرقام.',
     ];
 
+
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
+
+
     public function makePayment()
     {
         $this->validate();
 
-        $paymentMethod = $this->makeStripePayment();
-
-        $payment = PaymentModel::create([
-            'user_id' => auth()->id(),
-            'amount' => $this->amount,
-            'stripe_payment_id' =>$paymentMethod,
-            'status' => 'pending',
-        ]);
-
         try {
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
-            auth()->user()->charge($this->amount * 100, $paymentMethod, [
+            $paymentMethod = $this->makeStripePayment();
+
+            auth()->user()->charge($this->amount * 100, $paymentMethod->id, [
                 'currency' => 'AED',
                 'description' => "تفعيل حساب " . auth()->user()->email,
                 'receipt_email' => auth()->user()->email,
                 'return_url' => 'http://localhost:8000/dashboard'
             ]);
 
-            auth()->user()->paid = 1;
-            auth()->user()->save();
+            auth()->user()->payments()->create(
+                [
+                    'amount' => $this->amount,
+                    'status' => 'paid',
+                    'stripe_payment_id' => $paymentMethod->id,
+                ]
+            );
 
-            $payment->status = 'paid';
-            $payment->save();
+            Session::put('stripe_payment_id',$paymentMethod->id, 7 * 24 * 60);
 
-            return redirect()->route('success')->with('success', 'شكرا لك على إيداعك. تم تفعيل حسابك بنجاح');
-        } catch (\Stripe\Exception\CardException $e) {
+            return redirect()->route('dashboard.match.personal');
 
-            $payment->status = 'failed';
-            $payment->save();
-
-            session()->flash('payment-error', 'حدثت مشكلة أثناء الدفع.<br>'.$e->getError()->message);
+        } catch (CardException $e) {
+            $errorMessage = $e->getError()->message;
+            session()->flash('payment-error', $errorMessage);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            session()->flash('payment-error', 'حدثت مشكلة أثناء الدفع. الرجاء المحاولة مرة في وقت لاحق.');
             return redirect()->back();
         }
     }
 
-
-
     private function makeStripePayment()
     {
-        Stripe::setApiKey(env('stripe_secret'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        [$expMonth, $expYear] = explode('/', $this->expiryDate);
 
         $paymentMethod = PaymentMethod::create([
             'type' => 'card',
             'card' => [
                 'number' => $this->cardNumber,
-                'exp_month' => $this->cardExpiryMonth,
-                'exp_year' => $this->cardExpiryYear,
+                'exp_month' => $expMonth,
+                'exp_year' => $expYear,
                 'cvc' => $this->cardCVC,
             ],
         ]);
 
-        return $paymentMethod->id;
+        return $paymentMethod;
     }
+
 
 
     public function CouponCode()
@@ -133,6 +130,6 @@ class Payment extends Component
 
     public function render()
     {
-        return view('livewire.user.payment')->layout('User.layouts.app');
+        return view('livewire.user.payment');
     }
 }

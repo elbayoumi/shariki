@@ -1,47 +1,45 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Stripe\Stripe;
+use Stripe\StripeClient;
 
 class PaymentController extends Controller
 {
+    public $stripe;
 
     public function __construct() {
-        $this->middleware(['auth','email.verified']);
+
+        $this->stripe = new StripeClient(config('stripe.secret'));
+
     }
+
     public function index()
     {
-        return view('user.payment.index');
+        $checkout_session = $this->stripe->checkout->sessions->create([
+            'mode'=>'payment',
+            'success_url'=>'http://localhost:8000/pay/success',
+            'line_items' => [[
+              'price_data' => [
+                'currency' => 'AED',
+                'product_data' => [
+                  'name' => 'دفع إشتراك لموقع شريكي',
+                ],
+                'unit_amount' => 2000 * 100,
+              ],
+              'quantity' => 1,
+            ]],
+          ]);
+
+          return redirect($checkout_session->url);
+
     }
 
-    public function payment(Request $request)
+    public function success(Request $request)
     {
-        // Validate the request
-        $request->validate([
-            'coupon_code' => 'nullable|string|max:255',
-            'stripeToken' => 'required|string|max:255',
-        ]);
-
-        // Set your Stripe secret key
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        try {
-            // Make the payment with Cashier
-            $user = Auth::user();
-            $user->charge(1000, $request->stripeToken);
-
-            // Payment successful, redirect back with success message
-            return redirect()->back()->with('success', 'Payment successful!');
-        } catch (CardErrorException $e) {
-            // Catch and handle any card errors
-            return redirect()->back()->with('error', $e->getMessage());
-        } catch (ApiErrorException $e) {
-            // Catch and handle any other Stripe API errors
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        
     }
+
 }

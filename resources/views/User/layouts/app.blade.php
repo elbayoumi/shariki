@@ -14,7 +14,11 @@
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/multiStepsQs.css') }}" rel="stylesheet" />
     <!-- Popper -->
+
+    @livewireStyles
+
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- BoxIcons -->
     <link rel="stylesheet"
@@ -22,9 +26,11 @@
     <!-- Main Styling -->
     <link href="{{ asset('assets/css/soft-ui-dashboard-tailwind.css') }}?v=1.0.5" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <
     <!-- Nepcha Analytics (nepcha.com) -->
-    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    @livewireScripts
 
 
     <style>
@@ -47,7 +53,7 @@ body {
     <aside class="max-w-62.5 ease-nav-brand z-990 fixed inset-y-0 my-4 mr-4 block w-full translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 bg-white p-0 antialiased shadow-none transition-transform duration-200 xl:right-0 xl:translate-x-0 xl:bg-transparent">
       <div class="h-19.5">
         <i class="absolute top-0 right-0 hidden p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 xl:hidden" sidenav-close></i>
-        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="../pages/dashboard.html" target="_blank">
+        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="#">
           <img src="{{ asset('img/SHARIKI_LOGOo-removebg-preview.png')}}" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
           <span class="mr-1 font-semibold transition-all duration-200 ease-nav-brand">شريكي - @yield('title')</span>
         </a>
@@ -140,7 +146,12 @@ body {
         <!-- row 1 -->
         <div class="flex flex-wrap">
           <div class="w-full  px-4">
-            @yield('content')
+            @if (isset($slot))
+            {{ $slot }}
+            @else
+            @endif
+
+        @yield('content')
           </div>
       </div>
       <!-- end cards -->
@@ -153,4 +164,6 @@ body {
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- main script file  -->
   <script src="{{ asset('assets/js/soft-ui-dashboard-tailwind.js')}}"></script>
+
+  <script src="{{ asset('js/multiStepsQs.js')}}"></script>
 </html>

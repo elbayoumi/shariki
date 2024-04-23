@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('fixed_questions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('admin_id')->nullable()->constrained('admins');
+
             $table->string('m00_formula');
             $table->string('f00_formula');
             $table->timestamps();

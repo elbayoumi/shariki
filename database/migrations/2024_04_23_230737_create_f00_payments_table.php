@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\F00Request;
+use App\Models\Request\F00Request;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('stripe_payment_id')->unique();
             $table->enum('status', ['pending', 'paid', 'failed']);
             $table->decimal('amount', 8, 2);
+
+            $table->boolean('is_successful')->default(false);
 
             $table->timestamps();
         });

@@ -35,7 +35,7 @@
                 <small class="text-gray-600">يمكنك إنشاء طلب جديد من خلال الضغط على الزر أدناه</small>
             </div>
         </div>
-        <a href="">
+        <a href="{{ route('dashboard.pay') }}">
             <button class="border border-yellow-500 text-white px-6 py-3 mt-3 rounded-full hover:bg-yellow-500 transition-colors">إنشاء طلب جديد</button>
         </a>
     @endif

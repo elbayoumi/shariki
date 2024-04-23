@@ -13,6 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('f00_requests', function (Blueprint $table) {
+
             $table->id();
             $table->boolean('active')->default(false);
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();

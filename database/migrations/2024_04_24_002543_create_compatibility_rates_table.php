@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\FixeAnswers;
 use App\Models\Request\F00Request;
+use App\Models\Request\M00Request;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('f00_answers', function (Blueprint $table) {
+        Schema::create('compatibility_rates', function (Blueprint $table) {
             $table->id();
-
+            $table->foreignIdFor(M00Request::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(F00Request::class)->constrained()->cascadeOnDelete();
-
-            $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();
-
-            $table->timestamps();
+            $table->decimal('score', 8, 2);
+             $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('f00_answers');
+        Schema::dropIfExists('compatibility_rates');
     }
 };

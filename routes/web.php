@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Models\Request\F00Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Route::get('/', function () {
     }elseif(auth()->guard('admin')->check()){
         return redirect()->route('admin.dashboard');
     }
+    dd(F00Request::all());
     return view('index');
 });
 
@@ -56,5 +58,4 @@ Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('f
 
 Route::get('/terms', [App\Http\Controllers\HomeController::class, 'terms'])->name('terms');
 Route::get('/documentations', [App\Http\Controllers\HomeController::class, 'documentations'])->name('documentations');
-
 

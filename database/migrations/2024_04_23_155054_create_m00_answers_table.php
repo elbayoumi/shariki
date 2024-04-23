@@ -1,8 +1,7 @@
 <?php
 
 use App\Models\FixeAnswers;
-use App\Models\FixedQuestions;
-use App\Models\M00Request;
+use App\Models\Request\M00Request;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('m00_answers', function (Blueprint $table) {
             $table->id();
-            
+
             $table->foreignIdFor(M00Request::class)->constrained()->cascadeOnDelete();
 
             $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();
