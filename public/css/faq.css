@@ -1,0 +1,147 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap');
+* {
+  box-sizing: border-box;
+}
+
+body {
+    /* background: linear-gradient(to right, #154D47, #ffdf7e); */
+    background: url('../img/SHARIKI_LOGOo-blurred-removebg-preview.png');
+    
+    font-family: "Lateef", serif;
+  /* color: #9c5597; */
+  color: #154D47;
+}
+.fa-chevron-down:before{
+    color: #9c5597;
+}
+a{
+    text-decoration: none;
+    /* color: #154D47; */
+    color: #9c5597;
+    cursor: pointer;
+
+}
+
+/* heart style */
+ul {
+    list-style: none;
+}
+
+ul li:before {
+    content: "\2665 ";
+    color: #154D47;
+}
+/* ----- */
+
+h1 {
+  margin: 50px 0 30px;
+  text-align: center;
+}
+
+.faq-container {
+  margin: 0 auto;
+  max-width: 600px;
+  z-index: 2;
+
+}
+.header-h1 {
+  background-color: rgba(255, 255, 255, 0.89);
+  border-radius: 1rem;
+width: 100%;
+margin: auto;
+padding: 1rem;
+/* color: white; */
+}
+.faq {
+  filter: none !important; /* Remove the blur effect */
+  
+  /* background-color: #c3a978c5; */
+  border: 1px solid #154D47;
+  /* background-color: #156b5ea1; */
+  background-color: rgba(255, 255, 255, 0.93);
+
+  /* color: white; */
+
+  border-radius: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+  padding: 30px;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.faq.active {
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faq.active::before,
+.faq.active::after {
+  color: #154D47;
+  content: "\2665 ";
+  font-family: "Font Awesome 6 Free";
+  font-size: 7rem;
+  left: 20px;
+  opacity: 0.2;
+  position: absolute;
+  top: 20px;
+  z-index: 0;
+}
+
+.faq.active::before {
+  /* color: #9c5597; */
+  color: #c2a46e;
+  left: -30px;
+  top: -10px;
+  transform: rotateY(180deg);
+  /* background-image: url('/img/SHARIKI\ LOGO.jpg'); */
+}
+
+.faq-title {
+  margin: 0 35px 0 0;
+}
+
+.faq-text {
+  display: none;
+  margin: 30px 0 0;
+}
+
+.faq.active .faq-text {
+  display: block;
+}
+
+.faq-toggle {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  height: 30px;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  width: 30px;
+}
+.faq-toggle .fa-times,
+.faq.active .faq-toggle .fa-chevron-down {
+  display: none;
+}
+
+.faq.active .faq-toggle .fa-times {
+  color: #fff;
+  display: block;
+}
+
+.faq-toggle .fa-chevron-down {
+  display: block;
+}
+
+.faq.active .faq-toggle {
+  background-color: #154D47;
+}

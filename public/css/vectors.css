@@ -1,0 +1,43 @@
+
+/* hearts vector */
+.title::before ,
+.title::after {
+  /* color: #154D47; */
+   color: #9c5597;
+
+  content: "\2665 ";
+  font-family: "Font Awesome 6 Free";
+  font-size: 7rem;
+  left: 20px;
+  opacity: 0.2;
+  position: absolute;
+  top: 20px;
+  z-index: 0;
+}
+.title::before {
+  /* color: #9c5597; */
+  color: #154d47;
+  left: -30px;
+  top: -10px;
+}
+.mini-title::before ,
+.mini-title::after {
+  /* color: #154D47; */
+   color: #9c5597;
+
+  content: "\2665 ";
+  font-family: "Font Awesome 6 Free";
+  font-size: 7rem;
+  right: 90px;
+  opacity: 0.2;
+  position: absolute;
+  top: -90px;
+  z-index: 0;
+}
+.mini-title::before {
+  /* color: #9c5597; */
+  color: #154d47;
+  left: 790px;
+  top: 90px;
+}
+/* end vectors */
