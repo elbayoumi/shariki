@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\F00Request;
 use App\Models\FixeAnswers;
 use App\Models\FixedQuestions;
 use App\Models\Request;
@@ -16,9 +17,8 @@ return new class extends Migration
     {
         Schema::create('f00_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Request::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(F00Request::class)->constrained()->cascadeOnDelete();
 
-            $table->foreignIdFor(FixedQuestions::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();
 
             $table->timestamps();

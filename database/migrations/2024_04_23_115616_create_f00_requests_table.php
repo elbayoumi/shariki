@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('f00_requests', function (Blueprint $table) {
             $table->id();
-            
-            $table->enum('gender',['F00','M00'])->default('F00');
-
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('f00_requests');
     }
 };
