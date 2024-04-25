@@ -24,7 +24,7 @@ Route::get('/', function () {
     }elseif(auth()->guard('admin')->check()){
         return redirect()->route('admin.dashboard');
     }
-    dd(F00Request::all());
+    // dd(F00Request::all());
     return view('index');
 });
 

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Payment;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('m00_requests', function (Blueprint $table) {
+        Schema::create('general_guestions', function (Blueprint $table) {
             $table->id();
-            $table->boolean('active')->default(false);
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m00_requests');
+        Schema::dropIfExists('general_guestions');
     }
 };
