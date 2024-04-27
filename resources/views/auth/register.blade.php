@@ -36,7 +36,11 @@
 
             <input type="name" placeholder="البريد الالكتروني" name="email" value="{{ old('email') }}" class="w-full mb-4 px-4 py-2 rounded-md border @error('email') border border-red-300 @enderror focus:outline-none focus:border-indigo-500 text-right">
             <input type="password" placeholder="كلمة السر" name="password" class="w-full mb-4 px-4 py-2 rounded-md border @error('password') border border-red-300 @enderror focus:outline-none focus:border-indigo-500 text-right">
-
+            <select name="gender" class="w-full mb-4 px-4 py-2 rounded-md border @error('gender') border border-red-300 @enderror focus:outline-none focus:border-indigo-500 text-right">
+                <option value="">اختر الجنس</option>
+                <option value="male" @if(old('gender') == 'male') selected @endif class="text-right">ذكر</option>
+                <option value="female" @if(old('gender') == 'female') selected @endif class="text-right">أنثى</option>
+            </select>
             <button type="submit" class="w-full bg-indigo-500 text-white py-2 px-4 rounded-md focus:outline-none focus:bg-indigo-600"> تسجيل</button>
         </form>
         <hr class="w-64 h-1 bg-gradient-to-r from-transparent via-black/40 to-transparent mt-6" />

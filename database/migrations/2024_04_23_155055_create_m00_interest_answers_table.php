@@ -3,7 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\FixeAnswers;
+use App\Models\Request\M00Request;
 return new class extends Migration
 {
     /**
@@ -11,16 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fixed_questions', function (Blueprint $table) {
-            
+        Schema::create('m00_interest_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->nullable()->constrained('admins');
 
-            $table->string('general_formula');
-            $table->string('m00_formula');
-            $table->string('f00_formula');
+            $table->foreignIdFor(M00Request::class)->constrained()->cascadeOnDelete();
 
-            $table->timestamps();
+            $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();
+
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fixed_questions');
+        Schema::dropIfExists('m00_interest_answers');
     }
 };

@@ -20,7 +20,6 @@ return new class extends Migration
 
             $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();
 
-            $table->timestamps();
         });
     }
 

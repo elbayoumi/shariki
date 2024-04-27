@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(FixedQuestions::class)->constrained()->cascadeOnDelete();
 
+            $table->string('general_formula');
             $table->string('m00_formula');
             $table->string('f00_formula');
 

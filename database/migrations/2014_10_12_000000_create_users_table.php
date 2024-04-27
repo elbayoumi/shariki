@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->bigInteger('otp_code');
+            $table->enum('gender',['male','female']);
             $table->boolean('active')->default(true);
             $table->date('verified_at')->nullable();
             $table->string('image_path')->nullable();
