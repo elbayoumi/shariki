@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('gender',['male','female']);
             $table->boolean('active')->default(true);
             $table->date('verified_at')->nullable();
-            $table->string('image_path')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
