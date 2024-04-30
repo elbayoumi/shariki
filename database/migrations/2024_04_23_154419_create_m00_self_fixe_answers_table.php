@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\FixeAnswer\FixeAnswers;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,9 @@ return new class extends Migration
     {
         Schema::create('m00_self_fixe_answers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignIdFor(FixeAnswers::class)->constrained()->cascadeOnDelete();
+            $table->string('formula');
+
         });
     }
 

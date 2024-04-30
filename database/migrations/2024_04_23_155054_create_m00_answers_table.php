@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\FixeAnswers;
+use App\Models\FixeAnswer\FixeAnswers;
 use App\Models\Request\M00Request;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

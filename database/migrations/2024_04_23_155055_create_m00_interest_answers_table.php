@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\FixeAnswer\FixeAnswers;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\FixeAnswers;
 use App\Models\Request\M00Request;
 return new class extends Migration
 {
