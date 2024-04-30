@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\FixeAnswer;
 
 use App\Models\Answer\{
     F00Answer,
     M00Answer,
 };
+use App\Models\FixedQuestion\FixedQuestions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

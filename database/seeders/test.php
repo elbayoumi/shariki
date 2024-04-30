@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\FixeAnswers;
-use App\Models\FixedQuestions;
+use App\Models\FixedQuestion\FixedQuestions;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -190,7 +190,7 @@ class FixedQuestionSeeder extends Seeder
             ],
         ];
 
-        $FixedQuestions = new FixedQuestions;
+        $FixedQuestions = new FixedQuestions();
 
         foreach ($array as $key => $value) {
             $FixedQuestions = FixedQuestions::create($value['q']);

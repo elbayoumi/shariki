@@ -4,7 +4,7 @@ namespace App\Models\Answer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\FixeAnswers;
+use App\Models\FixeAnswer\FixeAnswers;
 use App\Models\Request\M00Request;
 class M00InterestAnswer extends Model
 {

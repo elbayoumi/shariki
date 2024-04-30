@@ -2,7 +2,7 @@
 
 namespace App\Models\Answer;
 
-use App\Models\FixeAnswers;
+use App\Models\FixeAnswer\FixeAnswers;
 use App\Models\Request\M00Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
