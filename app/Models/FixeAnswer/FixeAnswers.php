@@ -21,6 +21,10 @@ class FixeAnswers extends Model
     {
         return $this->hasMany(M00Answer::class);
     }
+    public function fixeAnswersForAll()
+    {
+        return $this->hasMany(FixeAnswersForAll::class);
+    }
     public function f00Answer()
     {
         return $this->hasMany(F00Answer::class);

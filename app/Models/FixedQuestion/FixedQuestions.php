@@ -15,20 +15,24 @@ class FixedQuestions extends Model
     {
         return $this->hasMany(FixeAnswers::class);
     }
-    public function f00Self()
+    public function f00SelfFixedQuestions()
     {
         return $this->hasMany(F00SelfFixedQuestions::class);
     }
-    public function m00Self()
+    public function m00SelfFixedQuestions()
     {
         return $this->hasMany(M00SelfFixedQuestions::class);
     }
-    public function m00Interested()
+    public function m00InterestedFixedQuestions()
     {
         return $this->hasMany(M00InterestedFixedQuestions::class);
     }
-    public function f00Interested()
+    public function f00InterestedFixedQuestions()
     {
         return $this->hasMany(F00InterestedFixedQuestions::class);
+    }
+    public function fixedQuestionsForAll()
+    {
+        return $this->hasMany(FixedQuestionsForAll::class);
     }
 }
