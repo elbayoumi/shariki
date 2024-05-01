@@ -15,12 +15,6 @@ return new class extends Migration
         Schema::create('fixe_answers', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(FixedQuestions::class)->constrained()->cascadeOnDelete();
-
-            $table->string('self_formula_m00')->nullable();
-            $table->string('self_formula_f00')->nullable();
-            $table->string('m00_formula')->nullable();
-            $table->string('f00_formula')->nullable();
-
             $table->timestamps();
         });
     }

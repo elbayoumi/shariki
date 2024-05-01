@@ -18,12 +18,6 @@ return new class extends Migration
             $table->foreignId('admin_id')->nullable()->constrained('admins');
 
             $table->foreignIdFor(FixedQuestionsCategory::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-
-            $table->string('self_formula_m00')->nullable();
-            $table->string('self_formula_f00')->nullable();
-            $table->string('m00_formula')->nullable();
-            $table->string('f00_formula')->nullable();
-            $table->enum('status',['F00','M00','General'])->default('General');
             $table->timestamps();
         });
     }
