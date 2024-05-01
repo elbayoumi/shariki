@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\FixeAnswers;
+use App\Models\FixeAnswer\FixeAnswers;
 use App\Models\FixedQuestion\FixedQuestions;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -30,49 +30,50 @@ class FixedQuestionSeeder extends Seeder
         ];
         $hiegh = [];
         for ($i = 110; $i <= 230; $i++) {
-            $hiegh[] = ['general_formula' => strval($i),'f00_formula' => strval($i), 'm00_formula' => strval($i)];
+            $hiegh[] = ['general_formula' => strval($i), 'f00_formula' => strval($i), 'm00_formula' => strval($i)];
         }
 
         $array = [
 
+
             [
-                'q' => [
-                    'general_formula' => 'المذهب',
-                    'f00_formula' => 'المذهب',
-                    'm00_formula' => 'المذهب',
-                ],
-                'a' => [
+                'fixed_questions' => ['fixed_questions_for_alls' => 'المذهب',],
+                'fixe_answers' => [
                     [
-                        'general_formula' => 'السني',
-                        'f00_formula' => 'السني',
-                        'm00_formula' => 'السني',
+                        'fixe_answers_for_alls' => 'السني',
                     ],
                     [
-                        'general_formula' => 'المالكي',
-                        'f00_formula' => 'المالكي',
-                        'm00_formula' => 'المالكي',
+                        'fixe_answers_for_alls' => 'المالكي',
                     ],
                     [
-                        'general_formula' => 'الشافعي',
-                        'f00_formula' => 'الشافعي',
-                        'm00_formula' => 'الشافعي',
+                        'fixe_answers_for_alls' => 'الشافعي',
+
                     ],
                     [
-                        'general_formula' => 'الحنفي',
-                        'f00_formula' => 'الحنفي',
-                        'm00_formula' => 'الحنفي',
+                        'fixe_answers_for_alls' => 'الحنفي',
                     ],
 
                 ]
             ],
+
+
         ];
 
-        $FixedQuestions = new FixedQuestions();
 
-        foreach ($array as $key => $value) {
-            $FixedQuestions = FixedQuestions::create($value['q']);
-            foreach ($value['a'] as $key => $value) {
-                $FixedQuestions->fixeAnswers()->create($value);
+        foreach ($array as $key => $values) {
+            $fixedQuestions = FixedQuestions::create();
+            $fixedQuestionsId = $fixedQuestions->id;
+            foreach ($values['fixed_questions'] as $key => $value) {
+
+                DB::table($key)->insert(['fixed_questions_id' => $fixedQuestionsId, 'formula' => $value]);
+            }
+
+            $fixeAnswers = FixeAnswers::create(['fixed_questions_id' => $fixedQuestionsId]);
+
+            foreach ($values['fixe_answers'] as $key => $value) {
+                foreach ($value as $key => $value) {
+                    DB::table($key)->insert(['fixe_answers_id' => $fixeAnswers->id, 'formula' => $value]);
+                }
             }
         }
     }
