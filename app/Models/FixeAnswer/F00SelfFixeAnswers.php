@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class F00SelfFixeAnswers extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    public $timestamps = false;
+    public function fixeAnswers()
+    {
+        return $this->belongsTo(FixeAnswers::class);
+    }
 }
