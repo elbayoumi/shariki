@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Dashboard\CouponCodesController;
 use App\Http\Controllers\Admin\Dashboard\HomeController as DashboardHomeController;
+use App\Http\Controllers\Admin\Dashboard\QuestionsController;
 use App\Http\Controllers\Admin\Dashboard\UsersController;
 use App\Http\Controllers\Admin\Dashboard\RequestController;
 use App\Http\Controllers\Admin\HomeController;
@@ -50,4 +51,5 @@ Route::group(['middleware' => 'auth:admin'], function () {
     });
 
     Route::resource('requests', RequestController::class);
+    Route::resource('questions', QuestionsController::class);
 });

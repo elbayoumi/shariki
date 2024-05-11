@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         // CouponCode::factory(250)->create();
         // $this->call(AdminSeeder::class);
-        $this->call(FixedQuestionSeeder::class);
+        $this->call([FixedQuestionSeeder::class,AdminSeeder::class]);
         }
 }

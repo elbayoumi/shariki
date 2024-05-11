@@ -91,6 +91,12 @@
               </a>
             </li>
 
+            <li class="menu-item ">
+                <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                  <i class="menu-icon tf-icons  bx bx-book-open "></i>
+                  <div data-i18n="questions">الاسئلة</div>
+                </a>
+              </li>
 
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Managment</span>
